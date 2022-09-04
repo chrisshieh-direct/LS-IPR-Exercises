@@ -3,11 +3,13 @@ word = gets.chomp
 
 letters = word.split("")
 print letters
+puts
 
 puts "What tiles do you have (use underscore for a blank)"
 tilesinput = gets.chomp
 tiles = tilesinput.split("")
 print tiles
+puts
 
 pointvalues = {
   a: 1,
@@ -51,13 +53,21 @@ points = 0
 =end
 
 letters.each do |x|
-  puts "working with #{x}"
+  value = pointvalues[x.to_sym]
+  puts "working with #{x} at value #{value}"
   tiles.each do |y|
     puts "looking at #{y}"
     if x == y
       puts "it's a match"
+      points = points + value
+      puts "new points value is #{points}"
+      tiles.delete(y)
+      print tiles
+      puts    
     end
   end
 end
 
 puts "Your word #{word} has this point value: #{points}."
+
+puts tiles
